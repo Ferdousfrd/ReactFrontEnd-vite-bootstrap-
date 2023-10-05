@@ -1,0 +1,6 @@
+**Creating a project with vite, typeScript and bootstrap**
+
+Do a todo list
+https://www.youtube.com/watch?v=jBmrduvKl5w&list=PLZlA0Gpn_vH_z2fqIg50_POJrUkJgBu7g
+Do a notepad list
+https://www.youtube.com/watch?v=j898RGRw0b4&list=PLZlA0Gpn_vH_z2fqIg50_POJrUkJgBu7g&index=7

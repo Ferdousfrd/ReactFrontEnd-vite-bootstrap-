@@ -1,0 +1,111 @@
+Practicing react again from scratch. Making a note
+From a Youtubre video :  https://www.youtube.com/watch?v=SqcY0GlETPk
+
+Using linux.
+Went to the linx root file directory and creating react-app. ( in root directory cuz its faser and solves the hot-reloading issue.)
+Using 'vite' cus its faster. vite is a new frontend build tool for react
+Commands:
+npm create vite@4.1.0(for the 4 version)
+chose framworke React and vaiant typeScript
+cd react-app
+npm i (for installing all libraries)
+npm run dev -to start the react app and its gonna host locally
+
+extentsion for typeScript files should be .ts or .tsx. tsx for react component. example: Message.tsx
+
+made a new component named Message.tsx. deleted everything from App.tsx. Used JSX and used our new component there.
+
+Going to use bootstrap for css in this learning react app
+command to install bootstrap:
+ npm i bootstrap@5.2.3
+
+Deleted everything from App.css and index.css since we dont need veet generated css
+going to use bootstrap. So, opened main.tsx and instead of importing index.css, i did--> import 'bootstrap/dist/css/bootstrap.css'
+now our content is on top left well formated.Z
+
+Always ise <> for multiple JSX
+
+Learning mapping:
+
+const items = ['sak','asd','asd','asd'];
+items.map=(item => <li>{item}</li>)  //use {} around it while in the code, cus JSX rendering rule
+..So this line above gonna work but if we inspect our web page and go to console, wi will see a warning saying-
+we should use a "key" for each items. React keeps a track key by id. Since we dont have any id atm, we will use-
+key={item}. The code line will look like- <li key={item}>{item}</li>
+
+If(?) else(:) with tunnery expression.{items.length === 0 ? <p>nothing</p> : null} 
+best practise is to use this way- {items.length === 0 && <p>Nohting</p>}. in this way, we dont have to use else value null. the logic is,
+its gonna check first part if true then execute && part and if first part false its not gonna execute && part and it will stop.
+
+>>>>how to comment in JSX. {/*comment here*/}. It is a regular /* Block Comments */ , but need to be wrapped in curly braces.
+
+Handling Events:
+<li onClick=()=>console.log(item)>{item}</li> //everytime we click on the item name, its gonna show in console the name of the item. We can also add parameter 'index' there 
+and do console.log(item, index) to show the index too.
+
+So doing this event handling in JSX is not good. So we shoud create funtion outside and call it in on click
+example: const eventHandling = ()=>console.log("clocked")
+--const eventHandling = (event)=>console.log(event) -browser event. when we use it, it needs react annotation. we have to import 'mouseEvent'.
+After importing mouseEvent, it will be like - const eventHandler=(event: mouseEvent) => console.log(event)
+
+Managing state:
+learning about useState(). 
+We have create an array with two variables such as selectedIndex and setSelecetedIndex and use them to Destructure useState().
+example : const [selectedIndex, setSelectedIndex] = useState(-1)
+we invoke useState('mario) first then destructure it with an array variable with two items such as const[name, setName] = useState('mario')
+** when we need to change a reactive value, we use useState()
+
+Passing data via props:
+props mean properties. we use them in a component. component is like a template or a cookie cutter(a child). So the main app (or mother)
+has some datas like name, roll, gpa. We can use these datas in our components(child file) thro props. Example. props.name, props.roll.
+**In typescript, we use the syntex 'interface'. it defines properties, methods etc. 
+in our code, we defined our prop, 'ListGroupProp{items:string[]; heading:string};' with interface.
+For our example code, 
+first we defined our props with interface, which was ListGroupProps which contained items and heading. Then in the function ListGroup(), we
+used our ListGroupProps as a perameter and in the perameter we also destructer it. It looked like this-
+function ListGroup({items, heading}: ListGroupProps)
+
+Passing Functions via props:
+So first, we create a prop function, which carries a function in the interface. example, interface props{onClickItem: (item: string)=> void}
+then we put that finction name in the component function perameter.then we use that prop function in the onclick event. So in onclick prop function we have to create a function that
+handles the evint which is a click and returns item name in console.
+so in our parent app, we have to create a handleSelectedItem function which returns the function name on click in the console, we have to put that handler function on onClicked propfunction
+
+Passing a children:
+Using the children prop we can use children to a component
+interface props {
+  children: ReactNode;
+}
+const Alert=({children} : props)=>{}
+as a result we can use children in our Alert component
+<div>
+      <Alert>
+        Hello <span>World</span> //<span> holds html
+      </Alert>
+
+Now making a component 'Button',
+first created a new file called Button.tsx. in there wrote, 'rafce' and the tamplate came. then imported this component in Main app.
+Then in interface, defined buttonProps with children (so that we can use html in there), a unction onClick and color which is a string
+Thats how it looks,
+
+interface buttonProps {
+  children: ReactNode;
+  onClick: () => void;
+  color: string;
+}
+
+const Button = ({ children, onClick, color }: buttonProps) => {
+  return (
+    <button className={"btn btn-" + color} onClick={onClick}>
+      {children}
+    </button>
+  );
+};
+
+And in main App parent file, it looks like,
+  <Button color="secondary" onClick={() => console.log("clicked")}>
+        Click Me
+      </Button>
+
+
+
